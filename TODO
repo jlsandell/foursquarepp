@@ -1,0 +1,3 @@
+* Implement search, get_checkins, etc
+* Probably alter all user-facing methods to return strings, since it's just JSON anyway
+* Write documentation.
