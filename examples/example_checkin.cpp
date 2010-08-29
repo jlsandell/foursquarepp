@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
         client::response response;
 
         FourSquare foursquare(apihost);
-        foursquare.set_credentials("user", "password");
+        foursquare.set_credentials("jeremy", "test");
 
         response = foursquare.checkin(latitude, longitude, venue_id);
         cout << body(response) << endl;
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     }
     catch(std::runtime_error &e)
     {
-        cerr << format("Runtime error - \"%s\"\n") % e.what();
+        cerr << boost::format("Runtime error - \"%s\"\n") % e.what();
     }
 
     return 0;

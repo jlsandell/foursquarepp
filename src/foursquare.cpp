@@ -102,6 +102,20 @@ http::client::response FourSquare::checkin(const std::string &latitude,
     return response;
 }
 
+http::client::response FourSquare::get_checkins()
+{
+    std::ostringstream uri;
+    uri << boost::format("%s/v1/checkins.json") % m_apihost;
+
+    http::client client;
+    http::client::response response;
+    http::client::request request = build_request(uri.str());
+
+    response = client.get(request);
+
+    return response;
+}
+
 
 http::client::request FourSquare::build_request(const std::string &uri,
                                                 const std::map<std::string, std::string> &data,
@@ -127,5 +141,17 @@ http::client::request FourSquare::build_request(const std::string &uri,
         request << header("Authorization", "Basic " + m_credentials);
 
     request << body(postdata);
+    return request;
+}
+
+http::client::request FourSquare::build_request(const std::string &uri,
+                                                const bool authenticate)
+{
+    http::client::request request(uri);
+    request << header("User-Agent", m_useragent);
+
+    if (authenticate && (!m_credentials.empty()))
+        request << header("Authorization", "Basic " + m_credentials);
+    
     return request;
 }

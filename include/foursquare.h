@@ -16,6 +16,10 @@ class FourSquare : boost::noncopyable {
                                         const std::map<std::string, std::string> &data,
                                         const bool authenticate = true);
 
+    // get request
+    boost::network::http::client::request build_request(const std::string &uri,
+                                                        const bool authenticate = true);
+
 
 public:
     FourSquare(const std::string &apihost = "http://api.foursquare.com",
@@ -27,6 +31,7 @@ public:
     boost::network::http::client::response checkin(const std::string &latitude,
                                                    const std::string &longitude,
                                                    const std::string &vid);
+    boost::network::http::client::response get_checkins();
 
     std::string urlencode_str(const std::string &input);
     std::string urlencode(const std::map<std::string, std::string> &argmap);
