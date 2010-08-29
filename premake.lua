@@ -6,20 +6,20 @@ project.bindir = "build"
 
 -- Package ----------------------------------------------------------------------------------
 
-package = newpackage()
+foursquarepp = newpackage()
 
-package.name = "foursquarepp"
-package.kind = "dll"
-package.language = "c++"
-package.configs = { "Debug", "Release" }
+foursquarepp.name = "foursquarepp"
+foursquarepp.kind = "dll"
+foursquarepp.language = "c++"
+foursquarepp.configs = { "Debug", "Release" }
 
 if (windows) then
-   table.insert(package.defines, "WIN32") -- Needed to fix something on Windows.
+   table.insert(foursquarepp.defines, "WIN32") -- Needed to fix something on Windows.
 end
 
 -- Include and library search paths, system dependent (I don't assume a directory structure)
 
-package.includepaths = {
+foursquarepp.includepaths = {
 -- for more boost awesomeness
 "./cpp-netlib/",
 "./include",
@@ -31,13 +31,13 @@ package.includepaths = {
 
 }
 
-package.libpaths = {
+foursquarepp.libpaths = {
 "/usr/local/lib",
 }
 
 -- Libraries to link to ---------------------------------------------------------------------
 
-package.links = {
+foursquarepp.links = {
 "pthread",
 "boost_system",
 "boost_regex",
@@ -48,32 +48,32 @@ package.links = {
 -- pkg-configable stuff ---------------------------------------------------------------------
 
 if (linux) then
-package.buildoptions = {
-"-Winvalid-pch"
+foursquarepp.buildoptions = {
+"-fpch-preprocess",
+"-Winvalid-pch",
 }
 
-package.linkoptions = {
+foursquarepp.linkoptions = {
 }
 end
 
 -- Files ------------------------------------------------------------------------------------
 
-package.files = {
+foursquarepp.files = {
 "src/foursquare.cpp"
---matchrecursive("include/*.h", "./src/*.cpp"),
 }
 
 -- Debug configuration ----------------------------------------------------------------------
 
-debug = package.config["Debug"]
+debug = foursquarepp.config["Debug"]
 debug.defines = { "DEBUG", "_DEBUG" }
 debug.objdir = "obj/debug"
-debug.target = "debug/" .. package.name .. "_d"
+debug.target = "debug/" .. foursquarepp.name .. "_d"
 
 debug.buildoptions = { "-g" }
 
 -- Release configuration --------------------------------------------------------------------
 
-release = package.config["Release"]
+release = foursquarepp.config["Release"]
 release.objdir = "obj/release"
-release.target = "release/" .. package.name
+release.target = "release/" .. foursquarepp.name
