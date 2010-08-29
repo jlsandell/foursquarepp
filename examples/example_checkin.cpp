@@ -1,3 +1,4 @@
+#include "common.h"
 #include "foursquare.h"
 
 int main(int argc, char* argv[])
@@ -8,7 +9,7 @@ int main(int argc, char* argv[])
     try
     {
         // for debugging
-        string apihost = "http://dev.local.lan/debug";
+        //string apihost = "http://dev.local.lan/debug";
 
         string latitude = "21.385311175714428";
         string longitude = "-157.94172763824463";
@@ -16,8 +17,9 @@ int main(int argc, char* argv[])
 
         client::response response;
 
-        FourSquare foursquare(apihost);
-        foursquare.set_credentials("jeremy", "test");
+        //FourSquare foursquare(apihost);
+        FourSquare foursquare;
+        foursquare.set_credentials("user", "password");
 
         response = foursquare.checkin(latitude, longitude, venue_id);
         cout << body(response) << endl;
