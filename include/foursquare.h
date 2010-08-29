@@ -1,5 +1,6 @@
 #ifndef _FOURSQUARE_H
 #define _FOURSQUARE_H
+
 #include "common.h"
 
 
@@ -28,10 +29,12 @@ public:
     ~FourSquare();
 
 
-    boost::network::http::client::response checkin(const std::string &latitude,
+    /*boost::network::http::client::response*/ std::string checkin(const std::string &latitude,
                                                    const std::string &longitude,
                                                    const std::string &vid);
-    boost::network::http::client::response get_checkins();
+
+    //boost::network::http::client::response get_checkins();
+    std::string get_checkins();
 
     std::string urlencode_str(const std::string &input);
     std::string urlencode(const std::map<std::string, std::string> &argmap);

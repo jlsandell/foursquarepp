@@ -52,6 +52,7 @@ example_checkin.links = {
 
 if (linux) then
 example_checkin.buildoptions = {
+"-Winvalid-pch"
 }
 
 example_checkin.linkoptions = {
@@ -111,6 +112,7 @@ example_getcheckins.links = {
 
 if (linux) then
 example_getcheckins.buildoptions = {
+"-Winvalid-pch"
 }
 
 example_getcheckins.linkoptions = {

@@ -49,6 +49,7 @@ package.links = {
 
 if (linux) then
 package.buildoptions = {
+"-Winvalid-pch"
 }
 
 package.linkoptions = {

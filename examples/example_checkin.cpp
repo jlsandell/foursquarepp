@@ -4,7 +4,6 @@
 int main(int argc, char* argv[])
 {
     using namespace std;
-    using namespace boost::network::http;
 
     try
     {
@@ -15,15 +14,11 @@ int main(int argc, char* argv[])
         string longitude = "-157.94172763824463";
         string venue_id = "713282";
 
-        client::response response;
-
-        //FourSquare foursquare(apihost);
         FourSquare foursquare;
         foursquare.set_credentials("user", "password");
 
-        response = foursquare.checkin(latitude, longitude, venue_id);
-        cout << body(response) << endl;
-
+        string response = foursquare.checkin(latitude, longitude, venue_id);
+        cout << response << endl;
     }
     catch(std::runtime_error &e)
     {

@@ -7,6 +7,9 @@ FourSquare::FourSquare(const std::string &apihost, const std::string &useragent)
                                                                                   m_useragent(useragent),
                                                                                   m_credentials("")
 {
+#ifdef DEBUG
+    std::cout << m_apihost << std::endl;
+#endif
 }
 
 void FourSquare::set_useragent(const std::string &useragent)
@@ -78,7 +81,14 @@ std::string FourSquare::urlencode_str(const std::string &input)
     return encoded;
 }
 
-http::client::response FourSquare::checkin(const std::string &latitude,
+
+/*
+ * Foursquare API methods.
+ * 
+ */
+
+//http::client::response
+std::string FourSquare::checkin(const std::string &latitude,
                                            const std::string &longitude,
                                            const std::string &vid)
 {
@@ -98,11 +108,14 @@ http::client::response FourSquare::checkin(const std::string &latitude,
 
     http::client client;
     http::client::response response;
+
     response = client.post(request);
-    return response;
+    std::string json = body(response);
+
+    return json;
 }
 
-http::client::response FourSquare::get_checkins()
+std::string FourSquare::get_checkins()
 {
     std::ostringstream uri;
     uri << boost::format("%s/v1/checkins.json") % m_apihost;
@@ -113,7 +126,9 @@ http::client::response FourSquare::get_checkins()
 
     response = client.get(request);
 
-    return response;
+    std::string json = body(response);
+
+    return json;
 }
 
 
